@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tem-sys — a free HTML/CSS template for devs</title>
+<meta name="description" content="Bare is a single-file, dependency-free HTML/CSS starter template. Copy it, ship it, no build step required.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   Tokens
+   ============================================ */
+:root {
+  --ink:        #0E0F0C;
+  --paper:      #F2EFE6;
+  --paper-dim:  #E8E4D7;
+  --orange:     #FF5A1F;
+  --graphite:   #6B6F66;
+  --utility-green: #1F3D2B;
+  --line: rgba(14, 15, 12, 0.16);
+
+  --display: 'Fraunces', serif;
+  --body: 'IBM Plex Sans', sans-serif;
+  --mono: 'IBM Plex Mono', monospace;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+}
+
+.frame {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+/* ============================================
+   Hero / file-bracket signature element
+   ============================================ */
+.hero {
+  position: relative;
+  padding: 96px 0 64px;
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.viewfinder {
+  position: absolute;
+  inset: 24px;
+  pointer-events: none;
+}
+
+.corner {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: var(--orange);
+  opacity: 0.55;
+}
+.corner.tl { top: 0; left: 0; border-top: 2px solid; border-left: 2px solid; }
+.corner.tr { top: 0; right: 0; border-top: 2px solid; border-right: 2px solid; }
+.corner.bl { bottom: 0; left: 0; border-bottom: 2px solid; border-left: 2px solid; }
+.corner.br { bottom: 0; right: 0; border-bottom: 2px solid; border-right: 2px solid; }
+
+.cursor-blink {
+  position: absolute;
+  top: 50%;
+  right: 6%;
+  width: 2px;
+  height: 34px;
+  margin-top: -17px;
+  background: var(--orange);
+  opacity: 0.6;
+  animation: blink 1.1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 0.6; }
+  50%, 100% { opacity: 0; }
+}
+
+.hero-inner { position: relative; z-index: 1; }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin: 0 0 18px;
+}
+
+h1 {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(48px, 9vw, 76px);
+  line-height: 0.98;
+  margin: 0 0 18px;
+  letter-spacing: -0.01em;
+}
+
+.role {
+  font-size: 17px;
+  color: var(--graphite);
+  max-width: 46ch;
+  margin: 0;
+}
+
+.role a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--orange);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+/* ============================================
+   Body blocks
+   ============================================ */
+.block {
+  padding: 48px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.lead {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(22px, 4vw, 28px);
+  line-height: 1.35;
+  margin: 0;
+  max-width: 32ch;
+}
+
+.body-text {
+  margin: 0;
+  font-size: 17px;
+  max-width: 56ch;
+  color: var(--ink);
+}
+
+.body-text strong {
+  color: var(--utility-green);
+  font-weight: 600;
+}
+
+.inline-link {
+  text-decoration: underline;
+  text-decoration-color: var(--orange);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+/* ============================================
+   Spec sheet (credentials as data, not bullets)
+   ============================================ */
+.spec-sheet {
+  padding: 48px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.spec-label {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  margin: 0 0 20px;
+}
+
+.spec-table {
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+
+.spec-row {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 16px;
+  align-items: baseline;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.spec-row dt {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--orange);
+}
+
+.spec-row dd {
+  margin: 0;
+  font-size: 16px;
+}
+
+/* ============================================
+   Closing line
+   ============================================ */
+.closing {
+  text-align: left;
+}
+
+.closing-line {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(24px, 4.5vw, 32px);
+  margin: 0;
+  color: var(--utility-green);
+}
+
+/* ============================================
+   Donation
+   ============================================ */
+.donate-section {
+  padding: 56px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.donate-card {
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 4px;
+  padding: 40px 32px;
+}
+
+.donate-eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin: 0 0 14px;
+}
+
+.donate-text {
+  margin: 0 0 28px;
+  max-width: 42ch;
+  color: var(--paper-dim);
+  font-size: 16px;
+}
+
+.donate-button {
+  display: inline-flex;
+  align-items: center;
+  background: var(--orange);
+  color: var(--ink);
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 16px;
+  padding: 14px 26px;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.donate-button:hover {
+  background: #ff7140;
+  transform: translateY(-1px);
+}
+
+.donate-note {
+  margin: 16px 0 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--graphite);
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+.site-footer {
+  padding: 40px 0 64px;
+  font-family: var(--mono);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--graphite);
+}
+
+.site-footer a {
+  text-decoration: none;
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-footer a:hover {
+  border-bottom-color: var(--orange);
+}
+
+.dot { color: var(--line); }
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 480px) {
+  .hero { padding: 64px 0 48px; }
+  .viewfinder { inset: 12px; }
+  .donate-card { padding: 32px 22px; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="frame">
+
+  <header class="hero">
+    <div class="viewfinder" aria-hidden="true">
+      <span class="corner tl"></span>
+      <span class="corner tr"></span>
+      <span class="corner bl"></span>
+      <span class="corner br"></span>
+      <span class="cursor-blink"></span>
+    </div>
+
+    <div class="hero-inner">
+      <p class="eyebrow">OPEN SOURCE &mdash; MIT LICENSE</p>
+      <h1>Tem-sys</h1>
+      <p class="role">A single-file HTML/CSS template. No build step, no dependencies, no framework to learn &mdash; just <a href="https://github.com/REPLACE_ME/bare" target="_blank" rel="noopener">fork it</a> and start editing.</p>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="block">
+      <p class="lead">
+        Most templates ship with a build pipeline you didn't ask for.
+        This one is just HTML and CSS &mdash; open the file, read it top to bottom, change what you need.
+      </p>
+    </section>
+
+    <section class="block">
+      <p class="body-text">
+        It's released under the <strong>MIT license</strong>, so you can use it for
+        personal sites, client work, or your next side project with no attribution
+        required. If you ship something with it, or fix a bug along the way,
+        a <a href="#" class="inline-link">pull request</a> is always welcome.
+      </p>
+    </section>
+
+    <section class="spec-sheet">
+      <p class="spec-label">WHAT'S INCLUDED</p>
+      <dl class="spec-table">
+        <div class="spec-row">
+          <dt>01</dt>
+          <dd>Zero dependencies &mdash; one HTML file, CSS inlined, nothing to install</dd>
+        </div>
+        <div class="spec-row">
+          <dt>02</dt>
+          <dd>Fully responsive, down to a 320px viewport</dd>
+        </div>
+        <div class="spec-row">
+          <dt>03</dt>
+          <dd>Accessible by default &mdash; visible focus states, respects reduced motion</dd>
+        </div>
+        <div class="spec-row">
+          <dt>04</dt>
+          <dd>CSS custom properties for every color and font, so theming is a find-and-replace</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="block closing">
+      <p class="closing-line">Clone it, break it, make it yours.</p>
+    </section>
+
+    <section class="donate-section">
+      <div class="donate-card">
+        <p class="donate-eyebrow">SUPPORT THE PROJECT</p>
+        <p class="donate-text">
+          Free and open source, maintained in spare time. If this template
+          saved you a setup step, a donation helps keep it updated and bug-free.
+        </p>
+        <a class="donate-button"
+           href="https://www.buymeacoffee.com/REPLACE_ME"
+           target="_blank" rel="noopener">
+          Donate &nbsp;&rarr;
+        </a>
+        <p class="donate-note">Secure checkout via Buy&nbsp;Me&nbsp;a&nbsp;Coffee — replace with your own donation link.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <a href="https://github.com/Teamsource-sys" target="_blank" rel="noopener">GitHub</a>
+    <span class="dot">&middot;</span>
+  </footer>
+
+</div>
+
+</body>
+</html>
